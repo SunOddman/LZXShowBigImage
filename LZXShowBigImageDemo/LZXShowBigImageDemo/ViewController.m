@@ -35,7 +35,6 @@
 - (void)loadBigImage {
     LZXBigImageView *bigImgView = [LZXBigImageView bigImageViewWithImageNamed:@"big.jpg"];
     [self.scrollView addSubview:bigImgView];
-    self.bigImageView = bigImgView;
     
     self.scrollView.contentSize = bigImgView.frame.size;
 }
