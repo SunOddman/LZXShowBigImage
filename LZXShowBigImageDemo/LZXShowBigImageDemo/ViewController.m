@@ -12,10 +12,6 @@
 @interface ViewController ()
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
-@property (weak, nonatomic) LZXBigImageView *bigImageView;
-
-@property (strong, nonatomic) UIImage *img;
-@property (assign, nonatomic) CGImageRef cgImg;
 
 @end
 
