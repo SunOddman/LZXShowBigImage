@@ -9,9 +9,10 @@
 #import "ViewController.h"
 #import "LZXBigImageView.h"
 
-@interface ViewController ()
+@interface ViewController () <UIScrollViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) LZXBigImageView *bigImgView;
 
 @end
 
@@ -26,15 +27,21 @@
 }
 
 - (void)configScrollView {
+    self.scrollView.delegate = self;
+    
     self.scrollView.bounces = NO;
     self.scrollView.showsVerticalScrollIndicator = YES;
     self.scrollView.showsHorizontalScrollIndicator = YES;
     self.scrollView.decelerationRate = UIScrollViewDecelerationRateFast;
+    
+    self.scrollView.minimumZoomScale = 0.05;
+    self.scrollView.maximumZoomScale = 1;
 }
 
 - (void)loadBigImage {
     LZXBigImageView *bigImgView = [LZXBigImageView bigImageViewWithImageNamed:@"big.jpg"];
     [self.scrollView addSubview:bigImgView];
+    self.bigImgView = bigImgView;
     
     self.scrollView.contentSize = bigImgView.frame.size;
 }
@@ -43,6 +50,10 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
+    return self.bigImgView;
 }
 
 
