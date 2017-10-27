@@ -129,12 +129,9 @@ const CGFloat LZXBigImageScrollViewDefaultZipSize = 0.6;
     return _currentShowBigView;
 }
 
-- (LZXBigImageView *)viewForZoomingSmaller:(BOOL)isSmaller {
-    
-    // 计算 scale
+- (LZXBigImageView *)shouldShowZipedBigImageView {
+    NSLog(@"**************");
     CGFloat scale = self.currentShowBigView.frame.size.width / self.contentSize.width;
-    NSInteger level = [self.arrBigImageViews indexOfObject:self.currentShowBigView];
-    
 #if defined(__LP64__) && __LP64__
     //# define CGFLOAT_TYPE double
     CGFloat currentzipLevel = floor(log(scale) / log(self.zipSize));
@@ -144,15 +141,25 @@ const CGFloat LZXBigImageScrollViewDefaultZipSize = 0.6;
     CGFloat currentzipLevel = floor(logf(scale) / log(scrollView.zipSize));
     CGFloat currentZip = powf(self.zipSize, currentzipLevel);
 #endif
+    NSInteger level = (NSInteger)currentzipLevel;
+    if (level < 0) {
+        level = 0;
+    }
     
-    if (self.arrBigImageViews.count <= currentzipLevel) {
-        for (NSInteger i = self.arrBigImageViews.count; i <= currentzipLevel; i ++) {
+    if (level >= self.arrBigImageViews.count) {
+        for (NSInteger i = self.arrBigImageViews.count; i <= level; i ++) {
+            NSLog(@"\n------正在生成【%zd】缩略图", i);
             LZXBigImageView *bigImgViewI = [LZXBigImageView zipImageView:self.arrBigImageViews[0] forLevel:currentZip];
             [self.arrBigImageViews addObject:bigImgViewI];
             [self addSubview:bigImgViewI];
         }
+        NSAssert(self.arrBigImageViews.count == level, @"添加缩略图个数不正确！！");
     }
-    return self.arrBigImageViews[(int)currentzipLevel];
+    if (level > self.arrBigImageViews.count) {
+        NSAssert(level <= self.arrBigImageViews.count, @"跨等级缩放！！！");
+    }
+    
+    return self.arrBigImageViews[level];
 }
 
 - (nullable UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
@@ -160,9 +167,13 @@ const CGFloat LZXBigImageScrollViewDefaultZipSize = 0.6;
     if ([_real_delegate respondsToSelector:@selector(viewForZoomingInScrollView:)]) {
         viewReturn = [_real_delegate viewForZoomingInScrollView:scrollView];
     }
-//    return self.arrBigImageViews[0];
     
-    return self.currentShowBigView;
+    viewReturn = [self shouldShowZipedBigImageView];
+    for (LZXBigImageView *bigView in self.arrBigImageViews) {
+        bigView.hidden = ![bigView isEqual:viewReturn];
+    }
+    
+    return viewReturn;
 }
 
 - (void)scrollViewWillBeginZooming:(UIScrollView *)scrollView withView:(nullable UIView *)view {
@@ -170,6 +181,7 @@ const CGFloat LZXBigImageScrollViewDefaultZipSize = 0.6;
         [_real_delegate scrollViewWillBeginZooming:scrollView withView:view];
     }
 }
+
 - (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(nullable UIView *)view atScale:(CGFloat)scale {
     if ([_real_delegate respondsToSelector:@selector(scrollViewDidEndZooming:withView:atScale:)]) {
         [_real_delegate scrollViewDidEndZooming:scrollView withView:view atScale:scale];
