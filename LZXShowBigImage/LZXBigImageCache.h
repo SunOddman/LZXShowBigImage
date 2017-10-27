@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-extern CGSize const LZXCacheSizeSmall;
-extern CGSize const LZXCacheSizeMiddle;
-extern CGSize const LZXCacheSizeBig;
+extern CGSize const kLZXCacheSizeSmall;
+extern CGSize const kLZXCacheSizeMiddle;
+extern CGSize const kLZXCacheSizeBig;
 
 extern NSString * const LZXDiskCacheFolderPath;
 

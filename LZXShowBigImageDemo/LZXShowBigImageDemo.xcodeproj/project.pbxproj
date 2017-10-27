@@ -17,6 +17,9 @@
 		3417ABD81F68FA6400D6C853 /* LZXBigImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3417ABD61F68FA6400D6C853 /* LZXBigImageView.m */; };
 		3417ABDC1F68FB5400D6C853 /* big.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3417ABDA1F68FB5400D6C853 /* big.jpg */; };
 		3417ABDD1F68FB5400D6C853 /* big1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3417ABDB1F68FB5400D6C853 /* big1.png */; };
+		347DE34C1F9A0B8600108D12 /* LZXBigImageScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 347DE34B1F9A0B8600108D12 /* LZXBigImageScrollView.m */; };
+		347DE34F1FA032A600108D12 /* LZXImageZipper.m in Sources */ = {isa = PBXBuildFile; fileRef = 347DE34E1FA032A600108D12 /* LZXImageZipper.m */; };
+		347DE35E1FA0813100108D12 /* ScrollViewDemoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 347DE35D1FA0813100108D12 /* ScrollViewDemoController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +39,12 @@
 		3417ABD61F68FA6400D6C853 /* LZXBigImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LZXBigImageView.m; sourceTree = "<group>"; };
 		3417ABDA1F68FB5400D6C853 /* big.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = big.jpg; sourceTree = "<group>"; };
 		3417ABDB1F68FB5400D6C853 /* big1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = big1.png; sourceTree = "<group>"; };
+		347DE34A1F9A0B8600108D12 /* LZXBigImageScrollView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LZXBigImageScrollView.h; sourceTree = "<group>"; };
+		347DE34B1F9A0B8600108D12 /* LZXBigImageScrollView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LZXBigImageScrollView.m; sourceTree = "<group>"; };
+		347DE34D1FA032A500108D12 /* LZXImageZipper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LZXImageZipper.h; sourceTree = "<group>"; };
+		347DE34E1FA032A600108D12 /* LZXImageZipper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LZXImageZipper.m; sourceTree = "<group>"; };
+		347DE35C1FA0813100108D12 /* ScrollViewDemoController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScrollViewDemoController.h; sourceTree = "<group>"; };
+		347DE35D1FA0813100108D12 /* ScrollViewDemoController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScrollViewDemoController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +83,8 @@
 				3417ABBF1F68F94E00D6C853 /* AppDelegate.m */,
 				3417ABC11F68F94E00D6C853 /* ViewController.h */,
 				3417ABC21F68F94E00D6C853 /* ViewController.m */,
+				347DE35C1FA0813100108D12 /* ScrollViewDemoController.h */,
+				347DE35D1FA0813100108D12 /* ScrollViewDemoController.m */,
 				3417ABC41F68F94E00D6C853 /* Main.storyboard */,
 				3417ABC71F68F94E00D6C853 /* Assets.xcassets */,
 				3417ABC91F68F94E00D6C853 /* LaunchScreen.storyboard */,
@@ -96,8 +107,12 @@
 			children = (
 				3417ABD51F68FA6400D6C853 /* LZXBigImageView.h */,
 				3417ABD61F68FA6400D6C853 /* LZXBigImageView.m */,
+				347DE34A1F9A0B8600108D12 /* LZXBigImageScrollView.h */,
+				347DE34B1F9A0B8600108D12 /* LZXBigImageScrollView.m */,
 				3417ABD31F68FA6400D6C853 /* LZXBigImageCache.h */,
 				3417ABD41F68FA6400D6C853 /* LZXBigImageCache.m */,
+				347DE34D1FA032A500108D12 /* LZXImageZipper.h */,
+				347DE34E1FA032A600108D12 /* LZXImageZipper.m */,
 			);
 			name = LZXShowBigImage;
 			path = ../LZXShowBigImage;
@@ -187,11 +202,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				347DE35E1FA0813100108D12 /* ScrollViewDemoController.m in Sources */,
 				3417ABD71F68FA6400D6C853 /* LZXBigImageCache.m in Sources */,
 				3417ABD81F68FA6400D6C853 /* LZXBigImageView.m in Sources */,
 				3417ABC31F68F94E00D6C853 /* ViewController.m in Sources */,
+				347DE34C1F9A0B8600108D12 /* LZXBigImageScrollView.m in Sources */,
 				3417ABC01F68F94E00D6C853 /* AppDelegate.m in Sources */,
 				3417ABBD1F68F94E00D6C853 /* main.m in Sources */,
+				347DE34F1FA032A600108D12 /* LZXImageZipper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -352,6 +370,7 @@
 				3417ABD11F68F94E00D6C853 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

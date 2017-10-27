@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "LZXBigImageView.h"
+#import "LZXBigImageScrollView.h"
 
 @interface ViewController () <UIScrollViewDelegate>
 

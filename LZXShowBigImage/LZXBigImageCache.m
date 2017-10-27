@@ -8,9 +8,9 @@
 
 #import "LZXBigImageCache.h"
 
-CGSize const LZXCacheSizeSmall = {64, 64};
-CGSize const LZXCacheSizeMiddle = {128, 128};
-CGSize const LZXCacheSizeBig = {256, 256};
+CGSize const kLZXCacheSizeSmall = {64, 64};
+CGSize const kLZXCacheSizeMiddle = {128, 128};
+CGSize const kLZXCacheSizeBig = {256, 256};
 
 NSString * const LZXDiskCacheFolderPath = @"LZXBigImageCache/";
 

@@ -11,7 +11,6 @@
 
 @interface LZXBigImageView ()
 
-@property (nonatomic, strong) LZXBigImageCache *imgCache;
 
 @end
 
@@ -34,18 +33,30 @@
     return [[self alloc] initWithImageNamed:imgName];
 }
 
-- (instancetype)initWithImageNamed:(NSString *)imgName {
-    UIImage *img = [UIImage imageNamed:imgName];
-    return [self initWithImage:img];
++ (instancetype)bigImageViewWithImage:(UIImage *)img {
+    return [[self alloc] initWithUIImage:img];
 }
 
-- (instancetype)initWithImage:(UIImage *)img {
++ (instancetype)bigImageViewWithUIImage:(UIImage *)img cacheSize:(CGSize)cacheImageSize {
+    return [[self alloc] initWithUIImage:img cacheSize:cacheImageSize];
+}
+
+- (instancetype)initWithImageNamed:(NSString *)imgName {
+    UIImage *img = [UIImage imageNamed:imgName];
+    return [self initWithUIImage:img];
+}
+
+- (instancetype)initWithUIImage:(UIImage *)img {
+    return [self initWithUIImage:img cacheSize:kLZXCacheSizeSmall];
+}
+
+- (instancetype)initWithUIImage:(UIImage *)img cacheSize:(CGSize)cacheImageSize {
     if (self = [super initWithFrame:CGRectMake(0, 0, img.size.width, img.size.height)]) {
         // 初始化 Cache
         LZXBigImageCache *cache = [[LZXBigImageCache alloc] init];
         cache.originalImage = img;
         _imgCache = cache;
-        self.cacheImageSize = LZXCacheSizeSmall;
+        self.cacheImageSize = cacheImageSize;
     }
     return self;
 }
@@ -66,6 +77,22 @@
 - (void)receiveMemoryWarning {
     NSLog(@"【Warning】收到内存警告！");
     [self.imgCache flushCache];
+}
+
+@end
+
+
+#pragma mark - Zipper
+#import "LZXImageZipper.h"
+
+@implementation LZXBigImageView (Zipper)
+
++ (instancetype)zipImageView:(LZXBigImageView *)originalImageView forLevel:(CGFloat)zipLevel {
+    UIImage *originalImage = originalImageView.imgCache.originalImage;
+    UIImage *zipImage = [LZXImageZipper zipImage:originalImage withZipLevel:zipLevel];
+    
+    id imgViewReturn = [self bigImageViewWithUIImage:zipImage cacheSize:kLZXCacheSizeSmall];
+    return imgViewReturn;
 }
 
 @end
